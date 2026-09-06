@@ -285,12 +285,22 @@ li {
 /* Alert Boxes */
 .alert-box {
   border-radius: var(--radius-md);
-  padding: 16px 20px;
+  padding: 15px 18px;
   margin: 18px 0;
+  border-left: 4px solid var(--primary-light);
+  background-color: #eff6ff;
+  color: var(--primary-dark);
+  line-height: 1.65;
+}
+
+.alert-box:has(.alert-icon),
+.alert-box.memory-trick,
+.alert-box.confusion,
+.alert-box.key-points,
+.alert-box.exam-def {
   display: flex;
   gap: 14px;
   align-items: flex-start;
-  border-left: 4px solid;
 }
 
 .alert-box.exam-def {
@@ -660,57 +670,131 @@ summary.qa-header:hover {
 }
 
 /* --------------------------------------------------------------------------
-   Responsive Breakpoints
+   Header & Navigation Components
    -------------------------------------------------------------------------- */
 
-@media (max-width: 900px) {
-  #sidebar {
-    transform: translateX(-100%);
-  }
-  #sidebar.open {
-    transform: translateX(0);
-  }
-  #main-content {
-    margin-left: 0;
-    width: 100%;
-    padding: 20px 16px;
-  }
-  .mobile-menu-btn {
-    display: block;
-  }
-  .tree-branches {
-    grid-template-columns: 1fr;
-    margin-left: 10px;
-    padding-left: 12px;
-  }
-}
-
-/* --------------------------------------------------------------------------
-   Unified Master Portal Styles (Modules 1, 2 & 3)
-   -------------------------------------------------------------------------- */
-
-/* Top Master Module Bar */
 .master-header-nav {
   position: sticky;
   top: 0;
   background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-light);
   padding: 10px 0;
   margin-bottom: 24px;
   z-index: 850;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header-main-row {
+  display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  gap: 14px;
+}
+
+.header-brand-mobile {
+  display: flex;
+  align-items: center;
   gap: 12px;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  padding: 7px 11px;
+  border-radius: var(--radius-sm);
+  font-size: 1.25rem;
+  color: var(--primary-dark);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.mobile-menu-btn:hover {
+  background: #f1f5f9;
+  border-color: var(--primary-light);
+}
+
+.mobile-logo-text {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--primary-dark);
+  letter-spacing: -0.2px;
+}
+
+.sidebar-brand-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar-close-btn {
+  display: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.sidebar-close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 1100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.sidebar-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body.drawer-open {
+  overflow: hidden;
 }
 
 .module-pills-bar {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding-bottom: 4px;
+  padding: 2px 2px 6px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+  width: 100%;
+}
+
+.module-pills-bar::-webkit-scrollbar {
+  height: 4px;
+}
+
+.module-pills-bar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 
 .mod-pill-btn {
@@ -722,10 +806,11 @@ summary.qa-header:hover {
   color: #334155;
   font-size: 0.88rem;
   font-weight: 600;
-  padding: 8px 16px;
+  padding: 7px 15px;
   border-radius: 30px;
   cursor: pointer;
   white-space: nowrap;
+  flex-shrink: 0;
   transition: all 0.2s ease;
 }
 
@@ -751,7 +836,7 @@ summary.qa-header:hover {
 /* Global Search Bar */
 .header-search-wrap {
   position: relative;
-  min-width: 260px;
+  min-width: 240px;
   flex: 1;
   max-width: 380px;
 }
@@ -759,7 +844,7 @@ summary.qa-header:hover {
 .header-search-input {
   width: 100%;
   padding: 8px 14px 8px 34px;
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   border: 1px solid #cbd5e1;
   border-radius: 20px;
   background: #ffffff;
@@ -808,7 +893,7 @@ summary.qa-header:hover {
 /* Syllabus Coverage Hub */
 .syllabus-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   gap: 16px;
   margin: 18px 0;
 }
@@ -817,7 +902,7 @@ summary.qa-header:hover {
   background: #ffffff;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  padding: 16px;
+  padding: 18px;
   box-shadow: var(--shadow-sm);
   transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -844,12 +929,13 @@ summary.qa-header:hover {
 
 .subtopic-list li {
   font-size: 0.84rem;
-  padding: 4px 0;
+  padding: 5px 0;
   border-bottom: 1px dashed #f1f5f9;
   display: flex;
   align-items: center;
   gap: 8px;
   color: #334155;
+  line-height: 1.5;
 }
 
 .subtopic-list li:last-child {
@@ -860,6 +946,7 @@ summary.qa-header:hover {
   color: var(--accent-green);
   font-weight: 700;
   font-size: 0.85rem;
+  flex-shrink: 0;
 }
 
 /* Highlight search matches */
@@ -868,4 +955,278 @@ mark.search-highlight {
   color: #000000;
   padding: 1px 3px;
   border-radius: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Layout & Breakpoints
+   -------------------------------------------------------------------------- */
+
+/* Large Desktops / 4K / Ultrawide */
+@media (min-width: 1600px) {
+  #main-content {
+    max-width: 1540px;
+    padding: 36px 64px 90px;
+  }
+  .syllabus-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Laptops & MacBooks (e.g. 13", 14", 15", 16" - 1025px to 1599px) */
+@media (min-width: 1025px) {
+  #main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+    max-width: 1400px;
+    padding: 30px 48px 80px;
+  }
+  .master-header-nav {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+  }
+  .header-main-row {
+    display: flex;
+    align-items: center;
+    width: auto;
+    flex: 1;
+    justify-content: flex-end;
+  }
+  .header-brand-mobile {
+    display: none;
+  }
+  .mobile-menu-btn {
+    display: none;
+  }
+  .sidebar-close-btn {
+    display: none;
+  }
+  .sidebar-backdrop {
+    display: none;
+  }
+  .module-pills-bar {
+    width: auto;
+    flex: 1;
+  }
+}
+
+/* Tablets (iPad, iPad Pro, Android Tablets - 769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  #sidebar {
+    transform: translateX(-100%);
+    width: 300px;
+    max-width: 82vw;
+    z-index: 1200;
+  }
+  #sidebar.open {
+    transform: translateX(0);
+  }
+  #main-content {
+    margin-left: 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 22px 28px 70px;
+  }
+  .mobile-menu-btn {
+    display: inline-flex;
+  }
+  .sidebar-close-btn {
+    display: inline-flex;
+  }
+  .syllabus-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .header-main-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .header-search-wrap {
+    min-width: 260px;
+    max-width: 360px;
+  }
+}
+
+/* Mobile Phones (Portrait & Landscape - max-width: 768px) */
+@media (max-width: 768px) {
+  html {
+    font-size: 14.5px;
+  }
+  #sidebar {
+    transform: translateX(-100%);
+    width: 290px;
+    max-width: 86vw;
+    z-index: 1200;
+  }
+  #sidebar.open {
+    transform: translateX(0);
+  }
+  #main-content {
+    margin-left: 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 12px 60px;
+  }
+  .mobile-menu-btn {
+    display: inline-flex;
+  }
+  .sidebar-close-btn {
+    display: inline-flex;
+  }
+  .master-header-nav {
+    margin: -14px -12px 18px -12px;
+    padding: 10px 14px 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    gap: 8px;
+  }
+  .header-main-row {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 8px;
+  }
+  .header-brand-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .header-search-wrap {
+    min-width: 100%;
+    max-width: 100%;
+  }
+  .header-search-input {
+    padding: 7px 12px 7px 32px;
+    font-size: 0.84rem;
+  }
+  .module-pills-bar {
+    gap: 6px;
+    padding: 2px 0 6px;
+  }
+  .mod-pill-btn {
+    font-size: 0.78rem;
+    padding: 6px 12px;
+  }
+  .card {
+    padding: 16px 14px;
+    margin-bottom: 16px;
+    border-radius: var(--radius-sm);
+  }
+  .card-title {
+    font-size: 1.05rem;
+  }
+  .section-header {
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+  }
+  .section-header h1 {
+    font-size: 1.32rem;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .content-header h2 {
+    font-size: 1.2rem;
+  }
+  h2.topic-title {
+    font-size: 1.12rem;
+    margin: 20px 0 10px;
+  }
+  h3.subtopic-title {
+    font-size: 0.98rem;
+    margin: 14px 0 8px;
+  }
+  .syllabus-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .summary-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .revision-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .step-box {
+    padding: 12px 14px;
+    margin: 10px 0;
+  }
+  .calc-line {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin: 8px 0;
+  }
+  .calc-label {
+    min-width: auto;
+    font-size: 0.88rem;
+  }
+  .calc-expr {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: normal;
+    word-break: break-all;
+    font-size: 0.84rem;
+    padding: 3px 6px;
+  }
+  .calc-badge {
+    font-size: 0.82rem;
+    padding: 2px 8px;
+    white-space: normal;
+    word-break: break-word;
+  }
+  .table-responsive {
+    margin: 12px 0;
+    border-radius: var(--radius-sm);
+    -webkit-overflow-scrolling: touch;
+  }
+  th, td {
+    padding: 8px 10px;
+    font-size: 0.82rem;
+  }
+  .diagram-figure {
+    padding: 8px;
+    margin: 12px 0;
+  }
+  .diagram-img {
+    max-height: 280px;
+  }
+  .exam-paper-alert {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+  .exam-paper-alert a {
+    text-align: center;
+    justify-content: center;
+  }
+  .tree-branches {
+    grid-template-columns: 1fr;
+    margin-left: 10px;
+    padding-left: 12px;
+  }
+}
+
+/* Extra Compact Phones (iPhone SE, Galaxy A, Fold - max-width: 400px) */
+@media (max-width: 400px) {
+  #main-content {
+    padding: 10px 8px 50px;
+  }
+  .card {
+    padding: 14px 10px;
+  }
+  .section-header h1 {
+    font-size: 1.2rem;
+  }
+  .content-header h2 {
+    font-size: 1.12rem;
+  }
+  th, td {
+    padding: 6px 8px;
+    font-size: 0.78rem;
+  }
 }

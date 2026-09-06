@@ -91,10 +91,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Close mobile sidebar if open
-    if (window.innerWidth <= 900 && sidebar) {
-      sidebar.classList.remove('open');
+    // Close mobile/tablet sidebar if open
+    if (window.innerWidth <= 1024) {
+      closeSidebar();
     }
+  }
+
+  // Mobile Drawer Open / Close Helpers
+  const sidebarClose = document.getElementById('sidebar-close');
+  const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+
+  function openSidebar() {
+    if (sidebar) sidebar.classList.add('open');
+    if (sidebarBackdrop) sidebarBackdrop.classList.add('active');
+    document.body.classList.add('drawer-open');
+  }
+
+  function closeSidebar() {
+    if (sidebar) sidebar.classList.remove('open');
+    if (sidebarBackdrop) sidebarBackdrop.classList.remove('active');
+    document.body.classList.remove('drawer-open');
   }
 
   // Hash Navigation Handler
@@ -161,20 +177,35 @@ document.addEventListener('DOMContentLoaded', () => {
   handleHash();
 
   // Mobile Drawer Toggle
-  if (mobileToggle && sidebar) {
+  if (mobileToggle) {
     mobileToggle.addEventListener('click', (e) => {
       e.stopPropagation();
-      sidebar.classList.toggle('open');
-    });
-
-    document.addEventListener('click', (e) => {
-      if (window.innerWidth <= 900 && sidebar.classList.contains('open')) {
-        if (!sidebar.contains(e.target) && e.target !== mobileToggle) {
-          sidebar.classList.remove('open');
-        }
+      if (sidebar && sidebar.classList.contains('open')) {
+        closeSidebar();
+      } else {
+        openSidebar();
       }
     });
   }
+
+  if (sidebarClose) {
+    sidebarClose.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeSidebar();
+    });
+  }
+
+  if (sidebarBackdrop) {
+    sidebarBackdrop.addEventListener('click', () => {
+      closeSidebar();
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidebar && sidebar.classList.contains('open')) {
+      closeSidebar();
+    }
+  });
 
   // Back to Top Button
   if (backToTopBtn) {

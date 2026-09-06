@@ -5,12 +5,15 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Computer Networks — Master Exam Study &amp; Revision Portal (Modules 1, 2 &amp; 3)</title>
-<link href="assets/css/style.css" rel="stylesheet"/>
+<link href="assets/css/style.css?v=responsive_2" rel="stylesheet"/>
 </head>
 <body>
 <aside id="sidebar">
 <div class="sidebar-brand">
+<div class="sidebar-brand-top">
 <h1><span>🌐</span> CN Master Portal</h1>
+<button aria-label="Close Navigation" class="sidebar-close-btn" id="sidebar-close">✕</button>
+</div>
 <span class="badge">Modules 1, 2 &amp; 3 Full Syllabus</span>
 </div>
 <div class="search-container" style="padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.1);">
@@ -129,19 +132,27 @@
 <div style="font-weight: 600; color: #cbd5e1; margin-top: 4px;">Modules 1, 2 &amp; 3 Combined</div>
 </div>
 </aside>
+<div aria-hidden="true" class="sidebar-backdrop" id="sidebar-backdrop"></div>
 <main id="main-content">
 <header class="master-header-nav">
-<button aria-label="Toggle Navigation" class="mobile-menu-btn" id="mobile-toggle">☰</button>
+<div class="header-main-row">
+<div class="header-brand-mobile">
+<button aria-label="Toggle Navigation Menu" class="mobile-menu-btn" id="mobile-toggle">☰</button>
+<span class="mobile-logo-text">🌐 CN Master Portal</span>
+</div>
+<div class="header-search-wrap">
+<span class="search-icon-badge">🔍</span>
+<input class="header-search-input" oninput="document.getElementById('global-search').value = this.value; document.getElementById('global-search').dispatchEvent(new Event('input'));" placeholder="Search syllabus, formulas, questions..." type="text"/>
+</div>
+</div>
 <div class="module-pills-bar">
-<button class="mod-pill-btn" data-mod="lastyear" style="background:#dc2626; color:#ffffff; border-color:#b91c1c;">📄 Last Year's Paper (2025–26 Solved)</button><button class="mod-pill-btn active" data-mod="all">🌐 All Modules Hub</button>
+<button class="mod-pill-btn" data-mod="lastyear" style="background:#dc2626; color:#ffffff; border-color:#b91c1c;">📄 Last Year's Paper (2025–26 Solved)</button>
+<button class="mod-pill-btn active" data-mod="all">🌐 All Modules Hub</button>
 <button class="mod-pill-btn" data-mod="m1">📘 Module 1</button>
 <button class="mod-pill-btn" data-mod="m2">📗 Module 2</button>
 <button class="mod-pill-btn" data-mod="m3">📙 Module 3</button>
 <button class="mod-pill-btn active-cram" data-mod="cram">⚡ Master Cram Sheet</button>
-<button class="mod-pill-btn" data-mod="exam" style="background:#4338ca; color:#ffffff; border-color:#3730a3;">🎯 Exam Pattern Q&amp;A</button></div>
-<div class="header-search-wrap">
-<span class="search-icon-badge">🔍</span>
-<input class="header-search-input" oninput="document.getElementById('global-search').value = this.value; document.getElementById('global-search').dispatchEvent(new Event('input'));" placeholder="Search syllabus, formulas, questions..." type="text"/>
+<button class="mod-pill-btn" data-mod="exam" style="background:#4338ca; color:#ffffff; border-color:#3730a3;">🎯 Exam Pattern Q&amp;A</button>
 </div>
 </header>
 <!-- Master Hub Sections -->
@@ -151,12 +162,14 @@
 <h2>100% Subtopic Coverage &amp; Examination Checklist</h2>
 <p class="chapter-subtitle">Every single topic and subtopic across all 12 college PDFs is covered in this unified portal. Use this checklist to verify your exam readiness.</p>
 </div>
-<div class="alert-box" style="margin-bottom: 24px;">
-<strong>🎯 Study Strategy for Tomorrow's Exam:</strong>
-    1. Click on any module pill above (Module 1, 2, or 3) to study topic by topic.<br/>
-    2. Focus heavily on the <strong>🧮 Solved Numericals</strong> tabs (CRC, Hamming, CSMA/CD, IPv4 Fragmentation, Subnetting, TDM).<br/>
-    3. Review the <strong>🚨 Final Revision</strong> cram sheet 1 hour before your exam.
-  </div>
+<div class="alert-box study-strategy-alert" style="margin-bottom: 24px;">
+<div style="font-weight: 700; font-size: 1.02rem; color: #1e3a8a; margin-bottom: 8px;">🎯 Study Strategy for Tomorrow's Exam:</div>
+<div style="font-size: 0.9rem; line-height: 1.65; color: #1e293b;">
+<p style="margin-bottom: 6px;"><strong>1. Study by Module:</strong> Click on any module pill above (Module 1, 2, or 3) to study topic by topic.</p>
+<p style="margin-bottom: 6px;"><strong>2. Master Numericals:</strong> Focus heavily on the <strong>🧮 Solved Numericals</strong> tabs (CRC, Hamming, CSMA/CD, IPv4 Fragmentation, Subnetting, TDM).</p>
+<p style="margin-bottom: 0;"><strong>3. Quick Cram:</strong> Review the <strong>🚨 Final Revision</strong> cram sheet 1 hour before your exam.</p>
+</div>
+</div>
 <div class="syllabus-grid">
 <!-- Module 1 Card -->
 <div class="syllabus-card">
@@ -6240,6 +6253,6 @@
 </section>
 </main>
 <button class="back-to-top" id="back-to-top" title="Back to Top">↑</button>
-<script src="assets/js/app.js"></script>
+<script src="assets/js/app.js?v=responsive_2"></script>
 </body>
 </html>
