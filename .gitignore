@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Python cache and temporary files
+__pycache__/
+*.pyc
+*.pyo
+
+# Build & scratch scripts
+*.py
+exam_paper_qa_section.html
+
+# Raw intermediate extraction folders (top-level only)
+/extracted_images/
+/diagrams/
+/rendered_diagrams/
+/images/
